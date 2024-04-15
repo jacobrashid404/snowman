@@ -32,7 +32,8 @@ class SnowmanUI {
     );
 
     this.$keyboard.append(...$letters);
-    this.$keyboard.addEventListener("click", this.handleGuess.bind(this));
+    this.boundHandleGuess = this.handleGuess.bind(this);
+    this.$keyboard.addEventListener("click", this.boundHandleGuess);
   }
 
   /** Update guessed word on board. */
@@ -59,6 +60,11 @@ class SnowmanUI {
     const isCorrect = this.game.guessLetter(letter);
     this.updateWord();
     this.updateImage();
+
+    if(this.game.gameState !== "PLAYING"){
+      this.displayResult();
+      this.$keyboard.removeEventListener("click", this.boundHandleGuess);
+    }
   }
 
   /** Handle clicking a letter button: disable button & handle guess. */
@@ -68,11 +74,10 @@ class SnowmanUI {
 
     if(!evt.target.matches(".letter")) return;
 
+    evt.target.disabled = true;
+
     const letter = evt.target.dataset.letter;
     this.guessLetter(letter);
-    if(this.game.gameState !== "PLAYING"){
-      this.displayResult();
-    }
   }
 
   /** Appends msg to DOM about the result of the game. */
