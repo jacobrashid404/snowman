@@ -65,7 +65,13 @@ class SnowmanLogic {
 
     this.numWrong += isCorrect ? 0 : 1;
 
-    // TODO: this should update the gameState attr to "WON" or "LOST"
+    if(this.numWrong > this.maxWrong){
+      this.gameState = "LOST";
+    }
+    
+    if(this.answer.split("").every(ltr => (this.guessedLetters.has(ltr)))){
+      this.gameState = "WON";
+    }
 
     return isCorrect;
   }
