@@ -1,5 +1,6 @@
 import { SnowmanLogic } from "./snowman.js";
 
+/** Class for updating DOM to reflect the current game state. */
 class SnowmanUI {
   constructor(maxWrong = 5) {
     console.debug("Snowman UI");
@@ -65,19 +66,23 @@ class SnowmanUI {
   handleGuess(evt) {
     console.debug("handleGuess");
 
+    if(!evt.target.matches("button")) return;
+
     const letter = evt.target.dataset.letter;
     this.guessLetter(letter);
     if(this.game.gameState !== "PLAYING"){
-      this.endGame();
+      this.displayResult();
     }
   }
-  
-  endGame(){
+
+  /** Appends msg to DOM about the result of the game. */
+
+  displayResult(){
     const $endMsg = document.createElement('div');
     const $snowman = document.querySelector('#Snowman');
     const answer = this.game.answer;
     const result = this.game.gameState.toLowerCase();
-    
+
     $endMsg.innerText = `You ${result}! The word was ${answer}!`;
     $snowman.appendChild($endMsg);
   }

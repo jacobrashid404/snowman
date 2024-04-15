@@ -68,7 +68,7 @@ class SnowmanLogic {
     if(this.numWrong > this.maxWrong){
       this.gameState = "LOST";
     }
-    
+
     if(this.answer.split("").every(ltr => (this.guessedLetters.has(ltr)))){
       this.gameState = "WON";
     }
