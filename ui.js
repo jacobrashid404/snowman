@@ -1,6 +1,6 @@
 import { SnowmanLogic } from "./snowman.js";
 
-/** Class for updating DOM to reflect the current game state. */
+/** Class for updating DOM to reflect the current Snowman game state. */
 class SnowmanUI {
   constructor(maxWrong = 5) {
     console.debug("Snowman UI");
@@ -66,7 +66,7 @@ class SnowmanUI {
   handleGuess(evt) {
     console.debug("handleGuess");
 
-    if(!evt.target.matches("button")) return;
+    if(!evt.target.matches(".letter")) return;
 
     const letter = evt.target.dataset.letter;
     this.guessLetter(letter);

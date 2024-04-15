@@ -69,7 +69,11 @@ class SnowmanLogic {
       this.gameState = "LOST";
     }
 
-    if(this.answer.split("").every(ltr => (this.guessedLetters.has(ltr)))){
+    const hasWon = this.answer
+      .split("")
+      .every(ltr => (this.guessedLetters.has(ltr)));
+
+    if(hasWon){
       this.gameState = "WON";
     }
 
