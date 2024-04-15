@@ -67,6 +67,19 @@ class SnowmanUI {
 
     const letter = evt.target.dataset.letter;
     this.guessLetter(letter);
+    if(this.game.gameState !== "PLAYING"){
+      this.endGame();
+    }
+  }
+  
+  endGame(){
+    const $endMsg = document.createElement('div');
+    const $snowman = document.querySelector('#Snowman');
+    const answer = this.game.answer;
+    const result = this.game.gameState.toLowerCase();
+    
+    $endMsg.innerText = `You ${result}! The word was ${answer}!`;
+    $snowman.appendChild($endMsg);
   }
 }
 
