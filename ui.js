@@ -84,8 +84,9 @@ class SnowmanUI {
 
   displayResult(){
     const $endMsg = document.createElement('div');
+    $endMsg.classList.add('Snowman-result-msg');
     const $snowman = document.querySelector('#Snowman');
-    const answer = this.game.answer;
+    const answer = this.game.answer.toUpperCase();
     const result = this.game.gameState.toLowerCase();
 
     $endMsg.innerText = `You ${result}! The word was ${answer}!`;
