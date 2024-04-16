@@ -7,10 +7,13 @@ class SnowmanUI {
 
     this.maxWrong = maxWrong;
     this.game = new SnowmanLogic(maxWrong);
+    this.boundHandleGuess = this.handleGuess.bind(this);
+
 
     this.$keyboard = document.querySelector("#Snowman-keyboard");
     this.$word = document.querySelector("#Snowman-word");
     this.$image = document.querySelector("#Snowman-image");
+
 
     this.updateWord();
     this.addKeyboard();
@@ -32,7 +35,6 @@ class SnowmanUI {
     );
 
     this.$keyboard.append(...$letters);
-    this.boundHandleGuess = this.handleGuess.bind(this);
     this.$keyboard.addEventListener("click", this.boundHandleGuess);
   }
 
@@ -52,7 +54,7 @@ class SnowmanUI {
     this.$image.src = `${this.game.numWrong}.png`;
   }
 
-  /** Handle guessing a letter. */
+  /** Handles guessing a letter and displays result if the game has ended*/
 
   guessLetter(letter) {
     console.debug("guessLetter", letter);
@@ -61,7 +63,7 @@ class SnowmanUI {
     this.updateWord();
     this.updateImage();
 
-    if(this.game.gameState !== "PLAYING"){
+    if (this.game.gameState !== "PLAYING") {
       this.displayResult();
       this.$keyboard.removeEventListener("click", this.boundHandleGuess);
     }
@@ -72,7 +74,7 @@ class SnowmanUI {
   handleGuess(evt) {
     console.debug("handleGuess");
 
-    if(!evt.target.matches(".letter")) return;
+    if (!evt.target.matches(".letter")) return;
 
     evt.target.disabled = true;
 
@@ -82,7 +84,7 @@ class SnowmanUI {
 
   /** Appends msg to DOM about the result of the game. */
 
-  displayResult(){
+  displayResult() {
     const $endMsg = document.createElement('div');
     $endMsg.classList.add('Snowman-result-msg');
     const $snowman = document.querySelector('#Snowman');
