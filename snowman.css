@@ -1,12 +1,37 @@
+body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: lightblue;
+}
+
 #Snowman {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-#Snowman-keyboard .letter {
-  margin-right: 1em;
+@media (min-width: 550px){
+  #Snowman{
+    max-width: 550px;
+  }
 }
+
+#Snowman-keyboard .letter {
+  margin: .5em;
+  background-color: hsl(16, 100%, 65%);
+  border: black 1px solid;
+  padding: .5em;
+  font-size: 1rem;
+  width: 40px;
+  font-weight: bold;
+}
+
+#Snowman-keyboard .letter:hover{
+  background-color: hsl(16, 100%, 55%);
+  transition: background-color .5s ease;
+}
+
 
 #Snowman-word {
   margin: 1em;
@@ -15,8 +40,12 @@
 }
 
 #Snowman-keyboard {
+  margin: 1em;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  width: 50%;
+}
+
+.Snowman-result-msg{
+  font-size: 2rem;
 }
